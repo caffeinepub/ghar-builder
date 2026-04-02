@@ -1,0 +1,147 @@
+{
+  "kind": "build_request",
+  "title": "Create Ghar Builder construction marketplace platform",
+  "projectName": "Ghar Builder",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a homepage that introduces Ghar Builder as a construction marketplace platform where users can find construction professionals and post construction projects",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "it is a constructiuon website like a guru .com it name is ghar builder"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Homepage displays the Ghar Builder branding and explains the platform purpose",
+        "Clear call-to-action buttons for both posting projects and browsing professionals",
+        "Professional construction-themed visual design"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement project posting functionality where users can create construction project listings with title, description, budget range, and project category (residential, commercial, renovation, etc.)",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "it is a constructiuon website like a guru .com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Form to create new project with all required fields",
+        "Projects are stored in backend and persist across sessions",
+        "Project categories include common construction types"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create a project browse/search page where users can view all posted construction projects with filtering by category and budget range",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "it is a constructiuon website like a guru .com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Display list of all projects with key details visible",
+        "Filter controls for category and budget range work correctly",
+        "Clicking a project shows full project details"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement professional profile creation where construction professionals can create profiles with their name, specialty (contractor, architect, engineer, etc.), experience, and service description",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "it is a constructiuon website like a guru .com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Form to create professional profile with all fields",
+        "Profiles are stored in backend and linked to user identity",
+        "Specialty options cover common construction roles"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Create a professionals directory page where users can browse and search construction professionals by specialty and filter by experience level",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "it is a constructiuon website like a guru .com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Display grid or list of professional profiles",
+        "Filter by specialty works correctly",
+        "Clicking a profile shows full professional details"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Integrate Internet Identity authentication so users can sign in to post projects or create professional profiles",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Login button triggers Internet Identity authentication",
+        "Authenticated users can access posting and profile features",
+        "Non-authenticated users can browse but not post"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Design the interface with a construction-industry themed visual style that uses earthy warm tones (oranges, browns, yellows), bold typography suitable for a professional marketplace, and incorporates construction imagery and iconography throughout the interface",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "it is a constructiuon website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Color scheme uses warm earthy tones consistently",
+        "Typography is bold and professional",
+        "Construction-related visual elements are present throughout",
+        "Overall aesthetic reflects the construction industry"
+      ]
+    }
+  ],
+  "constraints": [],
+  "nonGoals": [
+    "Real-time messaging between users and professionals",
+    "Payment processing or escrow services",
+    "Review and rating systems",
+    "Mobile app development"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Construction-themed hero banner showing building site or blueprints with warm color overlay (hero-construction.dim_1920x600.png)",
+      "Logo for Ghar Builder with construction tool or building iconography (ghar-builder-logo.dim_256x256.png)",
+      "Icon set for project categories: residential building, commercial building, renovation tools (category-icons.dim_512x512.png)"
+    ],
+    "edits": []
+  }
+}

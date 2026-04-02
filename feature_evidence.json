@@ -1,0 +1,160 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-homepage-that-introduces-ghar-builder-as-a-construction-marketplace-platform-where-users-can-find-construction-professionals-and-post-construction-projects",
+      "featureTitle": "Create a homepage that introduces Ghar Builder as a construction marketplace platform where users can find construction professionals and post construction projects",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-project-posting-functionality-where-users-can-create-construction-project-listings-with-title-description-budget-range-and-project-category-residential-commercial-renovation-etc",
+      "featureTitle": "Implement project posting functionality where users can create construction project listings with title, description, budget range, and project category (residential, commercial, renovation, etc.)",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/usePostProject.ts",
+        "frontend/src/pages/PostProjectPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-project-browse-search-page-where-users-can-view-all-posted-construction-projects-with-filtering-by-category-and-budget-range",
+      "featureTitle": "Create a project browse/search page where users can view all posted construction projects with filtering by category and budget range",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useBrowseProjects.ts",
+        "frontend/src/hooks/useGetProject.ts",
+        "frontend/src/pages/BrowseProjectsPage.tsx",
+        "frontend/src/pages/ProjectDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-professional-profile-creation-where-construction-professionals-can-create-profiles-with-their-name-specialty-contractor-architect-engineer-etc-experience-and-service-description",
+      "featureTitle": "Implement professional profile creation where construction professionals can create profiles with their name, specialty (contractor, architect, engineer, etc.), experience, and service description",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useCreateProfessionalProfile.ts",
+        "frontend/src/pages/CreateProfessionalProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-professionals-directory-page-where-users-can-browse-and-search-construction-professionals-by-specialty-and-filter-by-experience-level",
+      "featureTitle": "Create a professionals directory page where users can browse and search construction professionals by specialty and filter by experience level",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useBrowseProfessionals.ts",
+        "frontend/src/hooks/useGetProfessional.ts",
+        "frontend/src/pages/BrowseProfessionalsPage.tsx",
+        "frontend/src/pages/ProfessionalDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-integrate-internet-identity-authentication-so-users-can-sign-in-to-post-projects-or-create-professional-profiles",
+      "featureTitle": "Integrate Internet Identity authentication so users can sign in to post projects or create professional profiles",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AccessDeniedScreen.tsx",
+        "frontend/src/components/LoginButton.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useGetCallerUserProfile.ts",
+        "frontend/src/hooks/useSaveCallerUserProfile.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-design-the-interface-with-a-construction-industry-themed-visual-style-that-uses-earthy-warm-tones-oranges-browns-yellows-bold-typography-suitable-for-a-professional-marketplace-and-incorporates-construction-imagery-and-iconography-throughout-the-interface",
+      "featureTitle": "Design the interface with a construction-industry themed visual style that uses earthy warm tones (oranges, browns, yellows), bold typography suitable for a professional marketplace, and incorporates construction imagery and iconography throughout the interface",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

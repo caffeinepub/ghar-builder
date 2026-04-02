@@ -1,0 +1,230 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Ghar Builder Construction Marketplace Platform - Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create homepage introducing Ghar Builder construction marketplace with hero section, platform overview, and navigation to key features",
+      "acceptanceCriteria": [
+        "Homepage displays the Ghar Builder branding and explains the platform purpose",
+        "Clear call-to-action buttons for both posting projects and browsing professionals",
+        "Professional construction-themed visual design"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create homepage component featuring the generated hero banner image (frontend/public/assets/generated/hero-construction.dim_1920x600.png), Ghar Builder logo (frontend/public/assets/generated/ghar-builder-logo.dim_256x256.png), platform introduction text explaining the construction marketplace concept, and prominent call-to-action buttons linking to /projects/browse (Browse Projects), /professionals/browse (Find Professionals), /projects/post (Post a Project). Use warm construction-themed color palette with earthy tones. Include sections explaining how the platform works for both project posters and professionals."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register HomePage component as the default route path='/' in the router configuration. Ensure navigation includes links to all major sections: Home, Browse Projects, Browse Professionals, Post Project, and conditional authenticated user menu. Import and use the Ghar Builder logo from frontend/public/assets/generated/ghar-builder-logo.dim_256x256.png in the header/navigation."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define global CSS custom properties for construction-themed color palette using warm earthy tones: primary orange (#E67E22 or similar), secondary brown (#8B4513), accent yellow (#F39C12), and complementary neutral grays. Set up base typography using bold, professional font families suitable for a marketplace platform. Ensure these colors are consistently applied throughout the application."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement project posting form where authenticated users can create construction project listings with validation and backend persistence",
+      "acceptanceCriteria": [
+        "Form to create new project with all required fields",
+        "Projects are stored in backend and persist across sessions",
+        "Project categories include common construction types"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/PostProjectPage.tsx",
+          "operation": "create",
+          "description": "Create project posting page with a form containing fields: title (text input), description (textarea), budget range (two number inputs for min/max), and category dropdown (residential, commercial, renovation matching backend Category enum). Use the authorization component to ensure only authenticated users with #user role can access this page - show AccessDeniedScreen for guests. On form submission, call actor.postProject with form data and handle success/error states. Include category icons from frontend/public/assets/generated/category-icons.dim_512x512.png to visually represent each category option. After successful submission, redirect to project detail page or show success message. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/usePostProject.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook for posting projects. Use useMutation to call actor.postProject(title, description, budgetRange, category). Handle loading states, success callbacks (invalidate projects query cache), and error handling with user-friendly messages. Return mutation function and state for use in PostProjectPage."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register PostProjectPage component at route path='/projects/post' in the router. Ensure this route is accessible from the main navigation for authenticated users."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Create project browse page with filtering capabilities allowing users to view and search construction projects by category and budget",
+      "acceptanceCriteria": [
+        "Display list of all projects with key details visible",
+        "Filter controls for category and budget range work correctly",
+        "Clicking a project shows full project details"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/BrowseProjectsPage.tsx",
+          "operation": "create",
+          "description": "Create projects browse page displaying all construction projects in a grid or list layout. Include filter controls for category (dropdown with residential/commercial/renovation options matching Category enum) and budget range (min/max number inputs). Show project cards with title, description preview, category, budget range, and a 'View Details' button linking to /projects/:id. Use the category icons from frontend/public/assets/generated/category-icons.dim_512x512.png to visually identify each project's category. Implement client-side filtering or pass filter parameters to the backend query. This page should be publicly accessible (no authentication required for browsing)."
+        },
+        {
+          "path": "frontend/src/hooks/useBrowseProjects.ts",
+          "operation": "create",
+          "description": "Create React Query hook for fetching projects using useQuery. Call actor.browseProjects(category, minBudget, maxBudget) with filter parameters. Enable query to run without authentication (publicly accessible). Return projects array, loading state, and error state for use in BrowseProjectsPage."
+        },
+        {
+          "path": "frontend/src/pages/ProjectDetailPage.tsx",
+          "operation": "create",
+          "description": "Create project detail page showing full information for a single project. Use useParams to get projectId from route, then call actor.getProject(projectId) to fetch complete project data. Display all project fields: title, description, budget range, category with corresponding icon from frontend/public/assets/generated/category-icons.dim_512x512.png, and owner information if available. Include a back button to return to browse page. This page should be publicly accessible."
+        },
+        {
+          "path": "frontend/src/hooks/useGetProject.ts",
+          "operation": "create",
+          "description": "Create React Query hook for fetching a single project by ID using useQuery. Call actor.getProject(projectId) and return project data, loading state, and error state for use in ProjectDetailPage."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register BrowseProjectsPage at route path='/projects/browse' and ProjectDetailPage at route path='/projects/:id' in the router. Add navigation link to Browse Projects in the main menu."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement professional profile creation form where authenticated construction professionals can create detailed profiles",
+      "acceptanceCriteria": [
+        "Form to create professional profile with all fields",
+        "Profiles are stored in backend and linked to user identity",
+        "Specialty options cover common construction roles"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CreateProfessionalProfilePage.tsx",
+          "operation": "create",
+          "description": "Create professional profile creation page with a form containing fields: name (text input), specialty dropdown (contractor, architect, engineer, carpenter matching backend Specialty enum), experience (number input for years), and service description (textarea). Use the authorization component to ensure only authenticated users with #user role can access this page - show AccessDeniedScreen for guests. On form submission, call actor.createProfessionalProfile with form data. After successful creation, redirect to the professional's profile page or the professionals directory. Include validation for all required fields. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useCreateProfessionalProfile.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook for creating professional profiles. Use useMutation to call actor.createProfessionalProfile(name, specialty, experience, serviceDescription). Handle loading states, success callbacks (invalidate professionals query cache), and error handling. Return mutation function and state for use in CreateProfessionalProfilePage."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register CreateProfessionalProfilePage at route path='/professionals/create' in the router. Add navigation link for authenticated users to create their professional profile."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Create professionals directory page with filtering by specialty and experience allowing users to discover construction professionals",
+      "acceptanceCriteria": [
+        "Display grid or list of professional profiles",
+        "Filter by specialty works correctly",
+        "Clicking a profile shows full professional details"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/BrowseProfessionalsPage.tsx",
+          "operation": "create",
+          "description": "Create professionals directory page displaying all construction professionals in a grid layout. Include filter controls for specialty (dropdown with contractor/architect/engineer/carpenter options matching Specialty enum) and minimum experience (number input for years). Show professional cards with name, specialty, experience, and service description preview. Include 'View Profile' button linking to /professionals/:id. Implement filtering by passing parameters to backend query. This page should be publicly accessible (no authentication required)."
+        },
+        {
+          "path": "frontend/src/hooks/useBrowseProfessionals.ts",
+          "operation": "create",
+          "description": "Create React Query hook for fetching professionals using useQuery. Call actor.browseProfessionals(specialty, minExperience) with filter parameters. Enable query to run without authentication. Return professionals array, loading state, and error state for use in BrowseProfessionalsPage."
+        },
+        {
+          "path": "frontend/src/pages/ProfessionalDetailPage.tsx",
+          "operation": "create",
+          "description": "Create professional detail page showing complete information for a single professional. Use useParams to get professionalId from route, then call actor.getProfessional(professionalId) to fetch full profile. Display all fields: name, specialty, experience, service description. For authenticated users who own this profile, show edit and delete buttons. This page should be publicly accessible for viewing."
+        },
+        {
+          "path": "frontend/src/hooks/useGetProfessional.ts",
+          "operation": "create",
+          "description": "Create React Query hook for fetching a single professional by ID using useQuery. Call actor.getProfessional(professionalId) and return professional data, loading state, and error state for use in ProfessionalDetailPage."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register BrowseProfessionalsPage at route path='/professionals/browse' and ProfessionalDetailPage at route path='/professionals/:id' in the router. Add navigation link to Browse Professionals in the main menu."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Integrate Internet Identity authentication enabling users to sign in for posting projects and creating professional profiles",
+      "acceptanceCriteria": [
+        "Login button triggers Internet Identity authentication",
+        "Authenticated users can access posting and profile features",
+        "Non-authenticated users can browse but not post"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create login button component using the authorization component's useInternetIdentity hook. Follow the authorization component's login component pattern with login/logout toggle, disabled state during authentication, and proper queryClient.clear() on logout. Display 'Login' for unauthenticated users and 'Logout' for authenticated users. Use construction-themed styling with warm colors. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create profile setup modal component following the authorization component's user profile setup pattern. Use useGetCallerUserProfile hook with proper loading state handling to prevent modal flash. Show modal only when user is authenticated but has no profile (userProfile === null). Form should collect user name (required) and optionally email/phone. On submission, call actor.saveCallerUserProfile. Use the authorization component's pattern for checking profile existence on first login. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useGetCallerUserProfile.ts",
+          "operation": "create",
+          "description": "Create React Query hook for fetching the current user's profile following the authorization component's pattern. Use useQuery with queryKey ['currentUserProfile'], call actor.getCallerUserProfile(), and return custom state with proper isLoading that accounts for actor fetching state. This prevents profile setup modal flash on initial load. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useSaveCallerUserProfile.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook for saving the current user's profile. Use useMutation to call actor.saveCallerUserProfile(profile). Invalidate currentUserProfile query on success. Return mutation function and state for use in ProfileSetupModal."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Integrate LoginButton component in the main navigation/header. Add ProfileSetupModal to the app root level so it can trigger after login when needed. Ensure the authorization component's authentication flow is properly integrated: users must be logged in to post projects or create professional profiles, but can browse publicly. Handle logout by clearing all cached data using queryClient.clear()."
+        },
+        {
+          "path": "frontend/src/components/AccessDeniedScreen.tsx",
+          "operation": "create",
+          "description": "Create access denied screen component to show when unauthenticated users attempt to access protected routes like posting projects or creating profiles. Display friendly message explaining authentication is required with a prominent login button. Use construction-themed styling. This component is used by the authorization component for guarding protected pages."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Apply construction-industry themed visual design with warm earthy color palette, bold typography, and construction imagery throughout the interface",
+      "acceptanceCriteria": [
+        "Color scheme uses warm earthy tones consistently",
+        "Typography is bold and professional",
+        "Construction-related visual elements are present throughout",
+        "Overall aesthetic reflects the construction industry"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with construction-themed color palette using warm earthy tones: primary orange (#E67E22), secondary brown (#8B4513), accent yellow (#F39C12), success green for completed actions, and complementary neutrals. Configure custom font families with bold, professional options suitable for a construction marketplace. Add custom utility classes for construction-specific UI patterns if needed. These theme values should be used consistently across all components."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Apply global styles using the construction-themed color palette defined in Tailwind config. Set base body styling with warm background tones, professional typography with bold headings, and ensure good readability. Include any custom CSS for construction-related visual elements like borders, shadows, or texture patterns that complement the warm earthy theme. Reference the generated images (hero banner, logo, category icons) as static assets to be used throughout the UI."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create main layout component wrapping all pages with consistent header, navigation, and footer. Header should display the Ghar Builder logo from frontend/public/assets/generated/ghar-builder-logo.dim_256x256.png, main navigation links (Home, Browse Projects, Browse Professionals), and LoginButton. Use construction-themed styling with warm colors, bold typography, and professional appearance. Footer can include construction-related iconography and branding. Apply this layout to all routes in App.tsx."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all routes with the Layout component to ensure consistent construction-themed design across the entire application. Ensure the warm color palette and bold typography are applied consistently to all pages through the layout wrapper."
+        }
+      ]
+    }
+  ]
+}
